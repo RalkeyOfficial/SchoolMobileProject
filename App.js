@@ -1,18 +1,59 @@
-import { useState } from "react"
-import { StyleSheet, Text, View, Button } from "react-native"
+import { useEffect, useState } from "react"
+import {
+  Keyboard,
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TextInput,
+  Pressable,
+} from "react-native"
 
 export default function App() {
   const [count, setCount] = useState(0)
 
+  const onChanged = (text) => {
+    setCount(parseInt(text) || "")
+  }
+
+  useEffect(() => {
+    const keyboardShowListener = Keyboard.addListener("keyboardDidShow", () => {
+      // on keyboard show code here
+    })
+    const keyboardHideListener = Keyboard.addListener("keyboardDidHide", () => {
+      // on keyboard hide code here
+      !count || setCount(0)
+    })
+
+    return () => {
+      keyboardShowListener.remove()
+      keyboardHideListener.remove()
+    }
+  }, [])
+
   return (
     <View style={styles.container}>
-      <Text>{count}</Text>
+      <TextInput
+        onChangeText={onChanged}
+        value={count.toString()}
+        keyboardType={"numeric"}
+      />
       <View style={styles.buttons}>
-        <Button title="+10" onPress={() => setCount(count + 10)} />
-        <Button title="+1" onPress={() => setCount(count + 1)} />
-        <Button title="reset" onPress={() => setCount(0)} />
-        <Button title="-1" onPress={() => setCount(count - 1)} />
-        <Button title="-10" onPress={() => setCount(count - 10)} />
+        <Pressable style={styles.button} onPress={() => setCount(count + 10)}>
+          <Text style={styles.buttonText}>+10</Text>
+        </Pressable>
+        <Pressable style={styles.button} onPress={() => setCount(count + 1)}>
+          <Text style={styles.buttonText}>+1</Text>
+        </Pressable>
+        <Pressable style={styles.button} onPress={() => setCount(0)}>
+          <Text style={styles.buttonText}>reset</Text>
+        </Pressable>
+        <Pressable style={styles.button} onPress={() => setCount(count - 1)}>
+          <Text style={styles.buttonText}>-1</Text>
+        </Pressable>
+        <Pressable style={styles.button} onPress={() => setCount(count - 10)}>
+          <Text style={styles.buttonText}>-10</Text>
+        </Pressable>
       </View>
     </View>
   )
@@ -29,5 +70,14 @@ const styles = StyleSheet.create({
   buttons: {
     flexDirection: "row",
     gap: 16,
+  },
+  button: {
+    backgroundColor: "#f527e0",
+    borderRadius: 6,
+    padding: 6,
+	paddingHorizontal: 10,
+  },
+  buttonText: {
+    color: "#fff",
   },
 })
