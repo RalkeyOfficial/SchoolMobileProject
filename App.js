@@ -7,6 +7,7 @@ import {
   Button,
   TextInput,
   Pressable,
+  TouchableOpacity,
 } from "react-native"
 
 export default function App() {
@@ -39,21 +40,23 @@ export default function App() {
         keyboardType={"numeric"}
       />
       <View style={styles.buttons}>
-        <Pressable style={styles.button} onPress={() => setCount(count + 10)}>
-          <Text style={styles.buttonText}>+10</Text>
-        </Pressable>
-        <Pressable style={styles.button} onPress={() => setCount(count + 1)}>
-          <Text style={styles.buttonText}>+1</Text>
-        </Pressable>
-        <Pressable style={styles.button} onPress={() => setCount(0)}>
-          <Text style={styles.buttonText}>reset</Text>
-        </Pressable>
-        <Pressable style={styles.button} onPress={() => setCount(count - 1)}>
-          <Text style={styles.buttonText}>-1</Text>
-        </Pressable>
-        <Pressable style={styles.button} onPress={() => setCount(count - 10)}>
-          <Text style={styles.buttonText}>-10</Text>
-        </Pressable>
+        <TouchableOpacity>
+          <Pressable style={styles.button} onPress={() => setCount(count + 10)}>
+            <Text style={styles.buttonText}>+10</Text>
+          </Pressable>
+          <Pressable style={styles.button} onPress={() => setCount(count + 1)}>
+            <Text style={styles.buttonText}>+1</Text>
+          </Pressable>
+          <Pressable style={styles.button} onPress={() => setCount(0)}>
+            <Text style={styles.buttonText}>reset</Text>
+          </Pressable>
+          <Pressable style={styles.button} onPress={() => setCount(count - 1)}>
+            <Text style={styles.buttonText}>-1</Text>
+          </Pressable>
+          <Pressable style={styles.button} onPress={() => setCount(count - 10)}>
+            <Text style={styles.buttonText}>-10</Text>
+          </Pressable>
+        </TouchableOpacity>
       </View>
     </View>
   )
@@ -75,7 +78,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f527e0",
     borderRadius: 6,
     padding: 6,
-	paddingHorizontal: 10,
+    paddingHorizontal: 10,
   },
   buttonText: {
     color: "#fff",
