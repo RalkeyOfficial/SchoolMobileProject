@@ -4,18 +4,51 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
   TextInput,
   Pressable,
-  TouchableOpacity,
 } from "react-native"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+
+const storeNumber = async (key, value) => {
+  try {
+    await AsyncStorage.setItem(key, value.toString())
+    console.log(`saved ${value.toString()} at "${key}"`)
+  } catch (e) {
+    // saving error
+  }
+}
+
+const getNumber = async (key) => {
+  try {
+    const value = parseInt(await AsyncStorage.getItem("@number"))
+    console.log(value)
+    if (value !== null) {
+      // value previously stored
+      return value
+    }
+  } catch (e) {
+    // error reading value
+  }
+
+  return undefined
+}
 
 export default function App() {
   const [count, setCount] = useState(0)
 
+  useEffect(async () => {
+    console.log("set state")
+    const data = await getNumber()
+    setCount(data)
+  })
+
   const onChanged = (text) => {
     setCount(parseInt(text) || "")
   }
+
+  useEffect(() => {
+    storeNumber("@number", count)
+  }, [count])
 
   useEffect(() => {
     const keyboardShowListener = Keyboard.addListener("keyboardDidShow", () => {
@@ -40,23 +73,41 @@ export default function App() {
         keyboardType={"numeric"}
       />
       <View style={styles.buttons}>
-        <TouchableOpacity>
-          <Pressable style={styles.button} onPress={() => setCount(count + 10)}>
-            <Text style={styles.buttonText}>+10</Text>
-          </Pressable>
-          <Pressable style={styles.button} onPress={() => setCount(count + 1)}>
-            <Text style={styles.buttonText}>+1</Text>
-          </Pressable>
-          <Pressable style={styles.button} onPress={() => setCount(0)}>
-            <Text style={styles.buttonText}>reset</Text>
-          </Pressable>
-          <Pressable style={styles.button} onPress={() => setCount(count - 1)}>
-            <Text style={styles.buttonText}>-1</Text>
-          </Pressable>
-          <Pressable style={styles.button} onPress={() => setCount(count - 10)}>
-            <Text style={styles.buttonText}>-10</Text>
-          </Pressable>
-        </TouchableOpacity>
+        <Pressable
+          android_ripple={{ color: "#fff", radius: 24 }}
+          style={styles.button}
+          onPress={() => setCount(count - 10)}
+        >
+          <Text style={styles.buttonText}>-10</Text>
+        </Pressable>
+        <Pressable
+          android_ripple={{ color: "#fff", radius: 24 }}
+          style={styles.button}
+          onPress={() => setCount(count - 1)}
+        >
+          <Text style={styles.buttonText}>-1</Text>
+        </Pressable>
+        <Pressable
+          android_ripple={{ color: "#fff", radius: 32 }}
+          style={styles.button}
+          onPress={() => setCount(0)}
+        >
+          <Text style={styles.buttonText}>reset</Text>
+        </Pressable>
+        <Pressable
+          android_ripple={{ color: "#fff", radius: 24 }}
+          style={styles.button}
+          onPress={() => setCount(count + 1)}
+        >
+          <Text style={styles.buttonText}>+1</Text>
+        </Pressable>
+        <Pressable
+          android_ripple={{ color: "#fff", radius: 24 }}
+          style={styles.button}
+          onPress={() => setCount(count + 10)}
+        >
+          <Text style={styles.buttonText}>+10</Text>
+        </Pressable>
       </View>
     </View>
   )
