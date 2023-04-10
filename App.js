@@ -36,11 +36,13 @@ const getNumber = async (key) => {
 export default function App() {
   const [count, setCount] = useState(0)
 
-  useEffect(async () => {
-    console.log("set state")
-    const data = await getNumber()
-    setCount(data)
-  })
+  useEffect(() => {
+    ;(async () => {
+      console.log("set state")
+      const data = await getNumber()
+      setCount(data)
+    })()
+  }, [])
 
   const onChanged = (text) => {
     setCount(parseInt(text) || "")
