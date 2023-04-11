@@ -1,11 +1,11 @@
-import { StyleSheet, Text, Pressable } from "react-native";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 
 const Button = ({ children, onPress, style, textStyle, ripple }) => {
-  const buttonStyle = { ...styles.button, ...style };
+  const _buttonStyle = { ...styles.button, ...style };
   const _textStyle = { ...styles.buttonText, ...textStyle };
 
   return (
-    <Pressable android_ripple={ripple} style={buttonStyle} onPress={onPress}>
+    <Pressable android_ripple={ripple} style={_buttonStyle} onPress={onPress}>
       <Text style={_textStyle}>{children}</Text>
     </Pressable>
   );
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgb(128, 0, 255)",
-    borderRadius: 10,
+    borderRadius: 6,
     padding: 6,
   },
   buttonText: {

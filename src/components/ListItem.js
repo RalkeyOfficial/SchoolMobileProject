@@ -6,7 +6,7 @@ const ListItem = ({ title, description, onPress }) => {
     <View style={listItemStyles.listItem}>
       <View style={listItemStyles.listItemTop}>
         <Text style={listItemStyles.listItemTopText}>{title}</Text>
-        <Button style={listItemStyles.deleteButton} {...{ onPress }}>
+        <Button style={listItemStyles.deleteButton} textStyle={listItemStyles.deleteButtonText} {...{ onPress }}>
           X
         </Button>
       </View>
@@ -21,8 +21,8 @@ const listItemStyles = StyleSheet.create({
   listItem: {
     padding: 16,
     borderWidth: 1,
-    borderColor: "#fff",
-    borderRadius: 6,
+    borderColor: "rgb(150, 150, 150)",
+    borderRadius: 4,
     gap: 6,
   },
   listItemTop: {
@@ -36,9 +36,12 @@ const listItemStyles = StyleSheet.create({
   deleteButton: {
     backgroundColor: "rgb(215, 0, 0)",
     borderRadius: 128,
-    padding: 0,
-    paddingHorizontal: 8,
-    margin: 4,
+    maxHeight: 32,
+    paddingHorizontal: 11,
+    overflow: "visible",
+  },
+  deleteButtonText: {
+    fontSize: 16,
   },
   description: {
     color: "white",

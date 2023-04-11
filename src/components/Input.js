@@ -1,7 +1,7 @@
 import { TextInput } from "react-native";
 import { useController } from "react-hook-form";
 
-const Input = ({ style, control, name }) => {
+const Input = ({ style, control, multiline, name }) => {
   const { field } = useController({
     control,
     defaultValue: "",
@@ -13,6 +13,7 @@ const Input = ({ style, control, name }) => {
       onChangeText={field.onChange}
       placeholder={name}
       placeholderTextColor="grey"
+      {...{ multiline }}
       {...{ style }}
     />
   );
