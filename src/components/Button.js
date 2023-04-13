@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { StyleSheet, Text, Pressable } from "react-native";
 
 const Button = ({ children, onPress, style, textStyle, ripple }) => {
   const _buttonStyle = { ...styles.button, ...style };

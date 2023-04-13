@@ -8,8 +8,9 @@ import ListItemInputForm from "./components/ListItemInputForm";
 import { ListContext } from "./context/List";
 
 export default function Main() {
-  const [addItemBoolean, setAddItemBool] = useState(false);
   const [list, setList] = useContext(ListContext);
+  const [addItemBoolean, setAddItemBool] = useState(false);
+  const [enableSaving, setEnableSaving] = useState(false);
 
   // get data from key @ToDoList at start of program
   useEffect(() => {
@@ -21,7 +22,9 @@ export default function Main() {
 
   // set data to key @ToDoList on every change
   useEffect(() => {
-    setDataToKey("@ToDoList", list);
+    if (enableSaving) {
+      setDataToKey("@ToDoList", list);
+    } else setEnableSaving(true);
   }, [list]);
 
   return (
