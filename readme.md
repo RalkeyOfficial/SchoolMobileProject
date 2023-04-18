@@ -44,7 +44,7 @@ npm i
 ## starting the app
 
 1. open Android Studio and go to the device manager,
-open your virtual device in Cold Boot mode.
+   open your virtual device in Cold Boot mode.
 
 wait for the virtual device to be completed started up.
 
