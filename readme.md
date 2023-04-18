@@ -19,9 +19,11 @@ npm install --global expo-cli
 go to [Android Studio](https://developer.android.com/studio) and install the software.
 
 Enable Virtual Device in installation:
+
 ![android-studio-2022 1 1 21-windows_cXGKpD9pJ3](https://user-images.githubusercontent.com/30209145/232698236-e95fa718-17d0-4e0b-b71e-244b80eefd76.png)
 
-go to Virtual Device Manager.
+go to Virtual Device Manager:
+
 ![studio64_ihcL84lfbn](https://user-images.githubusercontent.com/30209145/232698296-2684fbb7-5ee6-4c0e-94cb-5f1a60b9eff7.png)
 
 1. click "Create device".
